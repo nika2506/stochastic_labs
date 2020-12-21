@@ -95,9 +95,10 @@ def intergroupDispersion(data):
 def intragroupDispersion(data):
     disp = 0
     size = len(data)
+    size_groups = len(data[0])
     for i in range(size):
         sum = np.sum((data[i] - np.mean(data[i])) ** 2) / (size - 1)
-        disp += sum / size
+        disp += sum / np.abs(size_groups - size)
     return disp
 
 
