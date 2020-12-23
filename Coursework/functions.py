@@ -4,6 +4,7 @@ from sklearn.preprocessing import StandardScaler
 import numpy as np
 from scipy.stats import mstats
 from sklearn.decomposition import PCA
+from mpl_toolkits.mplot3d import Axes3D
 
 def getSheetsFromExelFile(path):
     file = pd.ExcelFile(path)
@@ -35,12 +36,27 @@ def smoothOutEmissions(df):
     return new_df
 
 
-def showSamplesPlot(PCs_df, size1, size2):
-    plt.scatter(x=PCs_df.iloc[:size1, 0], y=PCs_df.iloc[:size1, 1], c='b', label='выборка №1')
-    plt.scatter(x=PCs_df.iloc[size1:size2, 0], y=PCs_df.iloc[size1:size2, 1], c='r', label='выборка №2')
-    plt.scatter(x=PCs_df.iloc[size2:, 0], y=PCs_df.iloc[size2:, 1], c='g', label='выборка №3')
+def showSamplesPlot(PCs_df, size1, size2, comp1, comp2):
+    plt.scatter(x=PCs_df.iloc[:size1, comp1], y=PCs_df.iloc[:size1, comp2], c='b', label='выборка №1')
+    plt.scatter(x=PCs_df.iloc[size1:size2, comp1], y=PCs_df.iloc[size1:size2, comp2], c='r', label='выборка №2')
+    plt.scatter(x=PCs_df.iloc[size2:, comp1], y=PCs_df.iloc[size2:, comp2], c='g', label='выборка №3')
     plt.xlabel('PC1')
     plt.ylabel('PC2')
+    plt.show()
+
+
+def showSamplesPlot3D(PCs_df, size1, size2, comp1, comp2, comp3):
+    fig = plt.figure()
+    ax = fig.add_subplot(projection='3d')
+    ax.scatter(xs=PCs_df.iloc[:size1, comp1], ys=PCs_df.iloc[:size1, comp2], zs=PCs_df.iloc[:size1, comp3], c='b', label='выборка №1')
+    ax.scatter(xs=PCs_df.iloc[size1:size2, comp1], ys=PCs_df.iloc[size1:size2, comp2], zs=PCs_df.iloc[size1:size2, comp3], c='r', label='выборка №2')
+    ax.scatter(xs=PCs_df.iloc[size2:, comp1], ys=PCs_df.iloc[size2:, comp2], zs=PCs_df.iloc[size2:, comp3], c='g', label='выборка №3')
+    #plt.xlabel('PC1')
+    #plt.ylabel('PC2')
+    #plt.zlabel('PC3')
+    ax.set_xlabel('X Label')
+    ax.set_ylabel('Y Label')
+    ax.set_zlabel('Z Label')
     plt.show()
 
 

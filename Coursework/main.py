@@ -29,7 +29,12 @@ if __name__ == '__main__':
     pcs_df = pd.DataFrame(pca.fit_transform(all_sheets))
 
     func.showHistPCA(pca)
-    func.showSamplesPlot(pcs_df, size_sheet_1, size_sheet_2)
+
+    comp1 = 1 #номера компонент по которым мы хотим сжать данные
+    comp2 = 2
+    comp3 = 3
+    func.showSamplesPlot(pcs_df, size_sheet_1, size_sheet_2, comp1, comp2)
+    func.showSamplesPlot3D(pcs_df, size_sheet_1, size_sheet_2, comp1, comp2, comp3)
 
     pca1, pca2, pca3 = func.calculatePCAs(sheet_1, sheet_2, sheet_3, num_elements)
     func.calculateAndPrintContributions(pca1, pca2, pca3, pca, elements)
